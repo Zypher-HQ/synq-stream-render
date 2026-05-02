@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.base.json",
+  "references": [
+    { "path": "artifacts/api-server" },
+    { "path": "artifacts/synq-stream" },
+    { "path": "lib/api-client-react" }
+  ]
+}

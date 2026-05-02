@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Synq Stream"
+version = "1.0.0"
+id = "artifacts/synq-stream"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21482
+
+[services.development]
+run = "pnpm --filter @workspace/synq-stream run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/synq-stream", "run", "build" ]
+publicDir = "artifacts/synq-stream/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21482"
+BASE_PATH = "/"
