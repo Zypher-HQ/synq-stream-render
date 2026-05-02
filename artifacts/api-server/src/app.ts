@@ -61,7 +61,7 @@ const publicPath = path.resolve(__dirname, "../../synq-stream/dist/public");
 app.use(express.static(publicPath));
 
 // Fallback to index.html for SPA routing
-app.get("*", (req, res) => {
+app.get("(.*)", (req, res) => {
   if (req.path.startsWith("/api")) return;
   res.sendFile(path.join(publicPath, "index.html"));
 });
