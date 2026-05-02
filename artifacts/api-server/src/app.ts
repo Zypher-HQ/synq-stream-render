@@ -60,8 +60,13 @@ app.use("/api", router);
 const publicPath = path.resolve(__dirname, "../../synq-stream/dist/public");
 app.use(express.static(publicPath));
 
+// Keep-alive endpoint
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok", timestamp: new Date().toISOString() });
+});
+
 // Fallback to index.html for SPA routing
-app.get("/:path*", (req, res) => {
+app.get("/:path(.*)", (req, res) => {
   if (req.path.startsWith("/api")) return;
   res.sendFile(path.join(publicPath, "index.html"));
 });
